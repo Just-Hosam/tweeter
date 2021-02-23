@@ -1,0 +1,27 @@
+nav {
+  height: 120px;
+  width: 100%;
+  background-color: #4056A1;
+  color: #FFFFFF;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#logo {
+  font-family: 'Bungee', sans-serif;
+}
+
+.nav-elems {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 1.5em;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.arrow {
+  color: red;
+}

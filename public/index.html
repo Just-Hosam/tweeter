@@ -6,6 +6,9 @@
 
     <!-- External CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" type="text/css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:ital,wght@0,300;0,700;1,300;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/nav.css" type="text/css" />
 
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
@@ -20,8 +23,14 @@
   <body>
     <!-- Top nav bar (fixed) -->
     <nav>
-      <span>tweeter</span>
+      <div class="nav-elems">
+        <span id="logo">tweeter</span>
+        <p><span class="arrow">&#8595</span> <span class="bold"> Write</span> a new tweet</p>
+      </div>
     </nav>
+    <div>
+      <p>This is nothing but a test</p>
+    </div>
 
     <!-- Page-specific (main) content here -->
     <main class="container"></main>
