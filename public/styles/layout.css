@@ -31,11 +31,4 @@ body {
  main {
    width: 90%;
    border: 1px solid black;
-
- }
-
- .tweet {
-   margin-top: 20px;
-   width: 100%;
-   border: 1px solid red;
  }
