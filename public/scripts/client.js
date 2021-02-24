@@ -24,7 +24,11 @@ const tweetData = [
 ]
 
 const renderTweets = function(tweets) {
-
+  for (const tweet of tweets) {
+    console.log('test');
+    const $newTweet = createTweetElement(tweet);
+    $('.tweet-feed').append($newTweet);
+  }
 }
 
 const createTweetElement = function(tweet) {
