@@ -7,6 +7,10 @@
   font-weight: bold;
 }
 
+.new-tweet {
+  margin-bottom: 40px;
+}
+
 .new-tweet textarea {
   background: transparent;
   color: black;
