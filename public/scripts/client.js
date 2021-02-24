@@ -36,8 +36,22 @@ const renderTweets = function(tweets) {
   }
 }
 
+// finds the date difference for the tweets
+const findDate = date => {
+  const nowDate = new Date();
+  const dateDiff = nowDate - date;
+  let convertedDate = Math.floor(dateDiff / (60 * 60 * 24 * 1000));
+  if (convertedDate >= 365) {
+    convertedDate = Math.floor(convertedDate / 365);
+    convertedDate > 1 ? convertedDate += ' Years' : convertedDate += ' Year';
+  } else {
+    convertedDate > 1 ? convertedDate += ' Days' : convertedDate += ' Day';
+  }
+  return convertedDate;
+}
+
 const createTweetElement = function(tweet) {
-  let $tweet = `
+  return `
     <article class="tweet-container">
       <header>
         <div>
@@ -58,7 +72,6 @@ const createTweetElement = function(tweet) {
         </div>
       </footer>
     </article>`;
-  return $tweet;
 }
 
 $(document).ready(function() {
