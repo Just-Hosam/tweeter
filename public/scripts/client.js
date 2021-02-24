@@ -23,6 +23,11 @@ const tweetData = [
   }
 ]
 
+// sorts tweet data based on created_at value
+const sortedData = tweetData.sort((a, b) => {
+  return b.created_at - a.created_at;
+});
+
 const renderTweets = function(tweets) {
   for (const tweet of tweets) {
     console.log('test');
