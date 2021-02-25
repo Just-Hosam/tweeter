@@ -57,6 +57,13 @@ const errorMsg = msg => {
   $('#error-cont h3').html(msg);
 };
 
+const composeTweetToggle = () => {
+  $('#compose-tweet').on('click', () => {
+    $('.new-tweet').slideToggle();
+    $('#tweet-text').focus();
+  });
+}
+
 $(document).ready(function() {
   $('#error-cont').hide();
   const loadTweets = function() {
@@ -68,18 +75,19 @@ $(document).ready(function() {
     })
   };
   // hash maps for sorting (!!!!)
+  composeTweetToggle();
 
   $('#test').on('submit', function(event) {
     event.preventDefault();
     const tweetContent = $('#tweet-text').val().length;
     const str = $('#test').serialize();
     if (tweetContent < 1) {
-      $('#error-cont h3').html('Too little');
+      $('#error-cont h3').html('You can\'t post an empty tweet!');
       $('#error-cont').slideDown('slow');
       return;
     }
     if (tweetContent > 140) {
-      $('#error-cont h3').html('Too Much');
+      $('#error-cont h3').html('You have exceeded the character limit!');
       $('#error-cont').slideDown('slow');
       return;
     }
