@@ -1,4 +1,4 @@
-const renderTweets = function(tweets) {
+const renderTweets = tweets => {
   for (const tweet of tweets) {
     const $newTweet = createTweetElement(tweet);
     $('.tweet-feed').prepend($newTweet);
@@ -21,13 +21,13 @@ const findDate = date => {
   return convertedDate;
 }
 
-const escape =  function(str) {
+const escape =  str => {
   let div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 }
 
-const createTweetElement = function(tweet) {
+const createTweetElement = tweet => {
   const newstr = escape(tweet.content.text);
   return `
   <article class="tweet-container">
@@ -91,7 +91,7 @@ const postTweet = data => {
   $('.counter').val(140);
 };
 
-$(document).ready(function() {
+$(document).ready(() => {
   $('#error-cont').hide();
   
   loadTweets();
