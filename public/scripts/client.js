@@ -5,7 +5,7 @@ const renderTweets = function(tweets) {
   }
 }
 
-// finds the date difference for the tweets
+// finds the date difference between now and date the tweet was created at.
 const findDate = date => {
   const nowDate = new Date();
   const dateDiff = nowDate - date;
@@ -54,7 +54,7 @@ const createTweetElement = function(tweet) {
 
 const errorMsg = msg => {
   $('#error-cont h3').html(msg);
-  $('#error-cont').slideDown('slow');
+  $('#error-cont').slideDown(200);
 };
 
 const composeTweetToggle = () => {
@@ -85,7 +85,7 @@ const loadTweets = () => {
 
 const postTweet = data => {
   const $tweet = createTweetElement(data[data.length - 1]);
-  $('#error-cont').slideUp();
+  $('#error-cont').slideUp(200);
   $('.tweet-feed').prepend($tweet);
   $('#tweet-text').val('');
   $('.counter').val(140);
@@ -100,12 +100,11 @@ $(document).ready(function() {
   $('#test').on('submit', event => {
     event.preventDefault();
 
-    const tweetContent = $('#tweet-text').val().length;
+    const tweetContentLength = $('#tweet-text').val().length;
+    if (tweetContentLength < 1) return errorMsg('You can\'t post an empty tweet!');
+    if (tweetContentLength > 140) return errorMsg('You have exceeded the character limit!');
+    
     const serializedStr = $('#test').serialize();
-    
-    if (tweetContent < 1) return errorMsg('You can\'t post an empty tweet!');
-    if (tweetContent > 140) return errorMsg('You have exceeded the character limit!');
-    
     ajaxFunc('POST', serializedStr)
       .then(() => ajaxFunc('GET'))
       .then(data => postTweet(data))
