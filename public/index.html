@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="./styles/header.css" type="text/css" />
     <link rel="stylesheet" href="./styles/new-tweet.css" type="text/css" />
     <link rel="stylesheet" href="./styles/tweet.css" type="text/css" />
+    <link rel="stylesheet" href="./styles/error.css" type="text/css" />
 
     <!-- External JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -45,8 +46,12 @@
     <!-- Page-specific (main) content here -->
     <main class="container">
       <section class="new-tweet">
-        <h2>Compose Tweet</h2>
-        <form action="/tweets" method="post">
+        <div class="" id="error-cont">
+          <div id="testing">
+            <h3></h3>
+          </div>
+        </div>
+        <form action="/tweets" method="post" id="test">
           <label for="tweet-text">What are you humming about?</label>
           <textarea name="text" id="tweet-text"></textarea>
           <div class="under-form">
@@ -55,8 +60,7 @@
           </div>
         </form>
       </section>
-      <div class="tweet-feed">
-  </div>
+      <div class="tweet-feed"></div>
     </main>
   </body>
   <script src="./scripts/composer-char-counter.js"></script>

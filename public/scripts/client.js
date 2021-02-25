@@ -1,7 +1,7 @@
 const renderTweets = function(tweets) {
   for (const tweet of tweets) {
     const $newTweet = createTweetElement(tweet);
-    $('.tweet-feed').append($newTweet);
+    $('.tweet-feed').prepend($newTweet);
   }
 }
 
@@ -52,16 +52,19 @@ const createTweetElement = function(tweet) {
   </article>`;
 }
 
+const errorMsg = msg => {
+  $('#error-cont').removeClass('hideElem');
+  $('#error-cont h3').html(msg);
+};
+
 $(document).ready(function() {
+  $('#error-cont').hide();
   const loadTweets = function() {
     $.ajax({
       url: '/tweets',
       method: 'GET'
     }).then(data => {
-      const sortedData = data.sort((a, b) => {
-        return b.created_at - a.created_at;
-      });
-      renderTweets(sortedData);
+      renderTweets(data);
     })
   };
   // hash maps for sorting (!!!!)
@@ -70,10 +73,17 @@ $(document).ready(function() {
     event.preventDefault();
     const tweetContent = $('#tweet-text').val().length;
     const str = $('#test').serialize();
-    if (tweetContent < 1 || tweetContent > 140) {
-      alert('HEELLLOOOOO');
+    if (tweetContent < 1) {
+      $('#error-cont h3').html('Too little');
+      $('#error-cont').slideDown('slow');
       return;
     }
+    if (tweetContent > 140) {
+      $('#error-cont h3').html('Too Much');
+      $('#error-cont').slideDown('slow');
+      return;
+    }
+    $('#error-cont').slideUp();
     
     $.ajax({
       data: str,
