@@ -79,8 +79,16 @@ const ajaxFunc = (method, data) => {
   }
 };
 
-const loadTweets = function() {
+const loadTweets = () => {
   ajaxFunc('GET').then(data => renderTweets(data));
+};
+
+const postTweet = data => {
+  const $tweet = createTweetElement(data[data.length - 1]);
+  $('#error-cont').slideUp();
+  $('.tweet-feed').prepend($tweet);
+  $('#tweet-text').val('');
+  $('.counter').val(140);
 };
 
 $(document).ready(function() {
@@ -89,23 +97,17 @@ $(document).ready(function() {
   loadTweets();
   composeTweetToggle();
 
-  $('#test').on('submit', function(event) {
+  $('#test').on('submit', event => {
     event.preventDefault();
 
     const tweetContent = $('#tweet-text').val().length;
-    const str = $('#test').serialize();
+    const serializedStr = $('#test').serialize();
     
     if (tweetContent < 1) return errorMsg('You can\'t post an empty tweet!');
     if (tweetContent > 140) return errorMsg('You have exceeded the character limit!');
     
-    ajaxFunc('POST', str)
+    ajaxFunc('POST', serializedStr)
       .then(() => ajaxFunc('GET'))
-      .then(data => {
-        const $tweet = createTweetElement(data[data.length - 1]);
-        $('#error-cont').slideUp();
-        $('.tweet-feed').prepend($tweet);
-        $('#tweet-text').val('');
-        $('.counter').val(140);
-      })
+      .then(data => postTweet(data))
     });
   });
