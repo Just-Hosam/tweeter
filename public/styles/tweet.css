@@ -9,6 +9,7 @@
 .tweet-container:hover {
   box-shadow: 10px 10px 2px #02020244;
   text-shadow: 1px 1px 1px #02020233;
+  transform: translate(-7px, -7px);
 }
 
 .tweet-container:hover .user-ID {
@@ -37,7 +38,8 @@
 .tweet-content {
   padding: 0 15px;
   border-bottom: 3px solid black;
-} 
+  word-wrap: anywhere;
+}
 
 .tweet-container footer {
   padding: 0 15px;
