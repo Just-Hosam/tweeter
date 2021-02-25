@@ -1,8 +1,8 @@
 $(document).ready(() => {
   $('#tweet-text').on('keyup', function() {
-    let textLength = $(this).val().length;
-    let counterElem = $(this).next().find('output');
-    let counterValue = 140 - textLength;
+    const textLength = $(this).val().length;
+    const counterElem = $(this).next().find('output');
+    const counterValue = 140 - textLength;
     counterElem.html(counterValue);
     if (counterValue < 0) {
       counterElem.addClass('toggleRed');
