@@ -21,27 +21,34 @@ const findDate = date => {
   return convertedDate;
 }
 
+const escape =  function(str) {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
 const createTweetElement = function(tweet) {
+  const newstr = escape(tweet.content.text);
   return `
   <article class="tweet-container">
-  <header>
-  <div>
-  <img src=${tweet.user.avatars}>
-  <p class="user-name">${tweet.user.name}</p>
-  </div>
-  <p class="user-ID">${tweet.user.handle}</p>
-  </header>
-  <div class="tweet-content">
-  <p>${tweet.content.text}</p>
-  </div>
-  <footer>
-  <p>${findDate(tweet.created_at)}</p>
-  <div class="icons">
-  <span>&#10084</span>
-  <span>&#8617</span>
-  <span>&#9873</span>
-  </div>
-  </footer>
+    <header>
+      <div>
+        <img src=${tweet.user.avatars}>
+        <p class="user-name">${tweet.user.name}</p>
+      </div>
+      <p class="user-ID">${tweet.user.handle}</p>
+    </header>
+    <div class="tweet-content">
+      <p>${newstr}</p>
+    </div>
+    <footer>
+      <p>${findDate(tweet.created_at)}</p>
+      <div class="icons">
+        <span>&#10084</span>
+        <span>&#8617</span>
+        <span>&#9873</span>
+      </div>
+    </footer>
   </article>`;
 }
 
@@ -67,6 +74,7 @@ $(document).ready(function() {
       alert('HEELLLOOOOO');
       return;
     }
+    
     $.ajax({
       data: str,
       url: '/tweets',
@@ -92,3 +100,4 @@ $(document).ready(function() {
   // }
   loadTweets();
 });
+
