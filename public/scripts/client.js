@@ -11,11 +11,13 @@ const findDate = date => {
   const nowDate = new Date();
   const dateDiff = nowDate - date;
   let convertedDate = Math.floor(dateDiff / (60 * 60 * 24 * 1000));
-  if (convertedDate >= 365) {
+  if (convertedDate < 1) {
+    convertedDate = 'Today'
+  } else if (convertedDate >= 365) {
     convertedDate = Math.floor(convertedDate / 365);
-    convertedDate > 1 ? convertedDate += ' Years' : convertedDate += ' Year';
+    convertedDate > 1 ? convertedDate += ' Years ago' : convertedDate += ' Year ago';
   } else {
-    convertedDate > 1 ? convertedDate += ' Days' : convertedDate += ' Day';
+    convertedDate > 1 ? convertedDate += ' Days ago' : convertedDate += ' Day ago';
   }
   return convertedDate;
 }
@@ -34,7 +36,7 @@ const createTweetElement = function(tweet) {
   <p>${tweet.content.text}</p>
   </div>
   <footer>
-  <p>${findDate(tweet.created_at)} ago</p>
+  <p>${findDate(tweet.created_at)}</p>
   <div class="icons">
   <span>&#10084</span>
   <span>&#8617</span>
@@ -68,5 +70,4 @@ $(document).ready(function() {
   });
 
   loadTweets();
-  
 });
