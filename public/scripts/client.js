@@ -55,6 +55,7 @@ const createTweetElement = tweet => {
 const errorMsg = msg => {
   $('#error-cont h3').html(msg);
   $('#error-cont').slideDown(200);
+  $('#testing').hide().fadeIn(300);
 };
 
 const composeTweetToggle = () => {
