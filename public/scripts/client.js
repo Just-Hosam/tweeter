@@ -53,8 +53,8 @@ const createTweetElement = function(tweet) {
 }
 
 const errorMsg = msg => {
-  $('#error-cont').removeClass('hideElem');
   $('#error-cont h3').html(msg);
+  $('#error-cont').slideDown('slow');
 };
 
 const composeTweetToggle = () => {
@@ -62,60 +62,50 @@ const composeTweetToggle = () => {
     $('.new-tweet').slideToggle();
     $('#tweet-text').focus();
   });
-}
+};
+
+const ajaxFunc = (method, data) => {
+  if (method === 'GET') {
+    return $.ajax({
+      url: '/tweets',
+      method: 'GET'
+    })
+  } else if (method === 'POST') {
+    return $.ajax({
+      data: data,
+      url: '/tweets',
+      method: 'POST'
+    })
+  }
+};
+
+const loadTweets = function() {
+  ajaxFunc('GET').then(data => renderTweets(data));
+};
 
 $(document).ready(function() {
   $('#error-cont').hide();
-  const loadTweets = function() {
-    $.ajax({
-      url: '/tweets',
-      method: 'GET'
-    }).then(data => {
-      renderTweets(data);
-    })
-  };
-  // hash maps for sorting (!!!!)
+  
+  loadTweets();
   composeTweetToggle();
 
   $('#test').on('submit', function(event) {
     event.preventDefault();
+
     const tweetContent = $('#tweet-text').val().length;
     const str = $('#test').serialize();
-    if (tweetContent < 1) {
-      $('#error-cont h3').html('You can\'t post an empty tweet!');
-      $('#error-cont').slideDown('slow');
-      return;
-    }
-    if (tweetContent > 140) {
-      $('#error-cont h3').html('You have exceeded the character limit!');
-      $('#error-cont').slideDown('slow');
-      return;
-    }
-    $('#error-cont').slideUp();
     
-    $.ajax({
-      data: str,
-      url: '/tweets',
-      method: 'POST'
-    }).then(() => {
-      $.ajax({
-        url: '/tweets',
-        method: 'GET'
-      }).then(data => {
+    if (tweetContent < 1) return errorMsg('You can\'t post an empty tweet!');
+    if (tweetContent > 140) return errorMsg('You have exceeded the character limit!');
+    
+    ajaxFunc('POST', str)
+      .then(() => ajaxFunc('GET'))
+      .then(data => {
         const $tweet = createTweetElement(data[data.length - 1]);
+        $('#error-cont').slideUp();
         $('.tweet-feed').prepend($tweet);
         $('#tweet-text').val('');
         $('.counter').val(140);
       })
     });
   });
-  // introduce func that can return a GET ajax or POST ajax based on given parameter
-  // const testGET = function() {
-  //   $.ajax({
-  //     url: '/tweets',
-  //     method: 'GET'
-  //   })
-  // }
-  loadTweets();
-});
-
