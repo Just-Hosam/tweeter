@@ -4,6 +4,8 @@ nav {
   background-color: #4056A1;
   color: #FFFFFF;
   position: fixed;
+  display: flex;
+  align-items: center;
   z-index: 10;
 }
 
@@ -13,9 +15,17 @@ nav {
 
 .nav-elems {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   padding: 1em 1.5em;
+}
+
+.nav-elems button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: white;
 }
 
 .bold {
