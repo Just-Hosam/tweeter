@@ -1,6 +1,7 @@
 .new-tweet form {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 .new-tweet label {
@@ -9,7 +10,6 @@
 
 .new-tweet {
   margin-bottom: 20px;
-  margin-top: 20px;
 }
 
 .new-tweet textarea {
@@ -20,7 +20,7 @@
   resize: none;
   border-bottom: 5px solid black;
   margin-top: 10px;
-  height: 2em;
+  height: 3em;
 }
 
 .new-tweet .under-form {
