@@ -24,7 +24,7 @@ body {
   align-items: center;
 }
 
-#media-test {
+#content-container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -38,17 +38,17 @@ main {
 }
 
 @media only screen and (min-width: 1024px) {
-  #media-test {
+  #content-container {
     flex-direction: row;
   }
 
-  #media-test .main-header {
+  #content-container .main-header {
     justify-content: flex-start;
     align-self: stretch;
     width: 50%;
   }
 
-  #media-test main {
+  #content-container main {
     padding: 0 20px 20px 20px;
     border-left: 4px solid black;
   }
