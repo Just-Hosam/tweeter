@@ -91,22 +91,25 @@ const postTweet = data => {
   $('.counter').val(140);
 };
 
-$(document).ready(() => {
-  $('#error-cont').hide();
-
-  loadTweets();
-  composeTweetToggle();
-
+const submitTweet = () => {
   $('#test').on('submit', event => {
     event.preventDefault();
-
+    
     const tweetContentLength = $('#tweet-text').val().length;
     if (tweetContentLength < 1) return errorMsg('You can\'t post an empty tweet!');
     if (tweetContentLength > 140) return errorMsg('You have exceeded the character limit!');
-
+    
     const serializedStr = $('#test').serialize();
     ajaxFunc('POST', serializedStr)
       .then(() => ajaxFunc('GET'))
       .then(data => postTweet(data))
   });
+};
+
+$(document).ready(() => {
+  $('#error-cont').hide();
+  
+  loadTweets();
+  composeTweetToggle();
+  submitTweet();
 });
