@@ -1,3 +1,13 @@
+$(document).ready(() => {
+  // hides error message at the start
+  $('#error-cont').hide();
+  
+  loadTweets();
+  composeTweetToggle();
+  submitTweet();
+});
+
+// renders the tweets to html
 const renderTweets = tweets => {
   for (const tweet of tweets) {
     const $newTweet = createTweetElement(tweet);
@@ -21,12 +31,14 @@ const findDate = date => {
   return convertedDate;
 }
 
+// escapes dangerous symbols and encodes them
 const escape =  str => {
   let div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
 }
 
+// returns a string formated as html
 const createTweetElement = tweet => {
   const newstr = escape(tweet.content.text);
   return `
@@ -52,18 +64,21 @@ const createTweetElement = tweet => {
   </article>`;
 }
 
+// populates error message html
 const errorMsg = msg => {
   $('#error-cont h3').html(msg);
   $('#error-cont').slideDown(200);
   $('#testing').hide().fadeIn(300);
 };
 
+// shows and hides compose tweet box via slide animations
 const composeTweetToggle = () => {
   $('#compose-tweet').on('click', () => {
     $('.new-tweet').slideToggle(200, () => $('#tweet-text').focus());
   });
 };
 
+// returns the ajax function needed based on method passed
 const ajaxFunc = (method, data) => {
   if (method === 'GET') {
     return $.ajax({
@@ -79,10 +94,12 @@ const ajaxFunc = (method, data) => {
   }
 };
 
+// loads all tweets present in our database
 const loadTweets = () => {
   ajaxFunc('GET').then(data => renderTweets(data));
 };
 
+// renders new tweet into html
 const postTweet = data => {
   const $tweet = createTweetElement(data[data.length - 1]);
   $('#error-cont').slideUp(200);
@@ -91,6 +108,7 @@ const postTweet = data => {
   $('.counter').val(140);
 };
 
+// posts new tweet
 const submitTweet = () => {
   $('#test').on('submit', event => {
     event.preventDefault();
@@ -105,11 +123,3 @@ const submitTweet = () => {
       .then(data => postTweet(data))
   });
 };
-
-$(document).ready(() => {
-  $('#error-cont').hide();
-  
-  loadTweets();
-  composeTweetToggle();
-  submitTweet();
-});
