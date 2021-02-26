@@ -68,7 +68,7 @@ const createTweetElement = tweet => {
 const errorMsg = msg => {
   $('#error-cont h3').html(msg);
   $('#error-cont').slideDown(200);
-  $('#testing').hide().fadeIn(300);
+  $('#error-text-cont').hide().fadeIn(300);
 };
 
 // shows and hides compose tweet box via slide animations
