@@ -16,7 +16,7 @@ npm install
 ```
 2. Run the development web server using the following command.
 ```
-npm run local
+npm start
 ```
 
 3. Visit the following URL to start navigating the web application *after* running the server
@@ -28,10 +28,10 @@ http://localhost:8080/
 
 ## Final Product
 
-!["Screenshot of Login page"](https://github.com/Just-Hosam/tinyapp/blob/master/docs/Login-page.png)
-!["Screenshot of new URL page"](https://github.com/Just-Hosam/tinyapp/blob/master/docs/New_URL_page.png)
-!["Screenshot of URL edit page"](https://github.com/Just-Hosam/tinyapp/blob/master/docs/URL_edit_page.png)
-!["Screenshot of URLs table"](https://github.com/Just-Hosam/tinyapp/blob/master/docs/URLs_table.png)
+!["Screenshot of Base page"](https://github.com/Just-Hosam/tweeter/blob/master/docs/Base-look.png)
+!["Screenshot of Mobile version"](https://github.com/Just-Hosam/tweeter/blob/master/docs/mobile-hidden-compose.png)
+!["Screenshot of no content error"](https://github.com/Just-Hosam/tweeter/blob/master/docs/no-content-error.png)
+!["Screenshot of over char limit error"](https://github.com/Just-Hosam/tweeter/blob/master/docs/too-many-char-error.png)
 
 ## Known Issues/Bugs
 
