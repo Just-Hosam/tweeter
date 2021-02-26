@@ -13,7 +13,7 @@ const renderTweets = tweets => {
     const $newTweet = createTweetElement(tweet);
     $('.tweet-feed').prepend($newTweet);
   }
-}
+};
 
 // finds the date difference between now and date the tweet was created at.
 const findDate = date => {
@@ -29,14 +29,14 @@ const findDate = date => {
     convertedDate > 1 ? convertedDate += ' Days ago' : convertedDate += ' Day ago';
   }
   return convertedDate;
-}
+};
 
 // escapes dangerous symbols and encodes them
 const escape =  str => {
   let div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
-}
+};
 
 // returns a string formated as html
 const createTweetElement = tweet => {
@@ -62,7 +62,7 @@ const createTweetElement = tweet => {
       </div>
     </footer>
   </article>`;
-}
+};
 
 // populates error message html
 const errorMsg = msg => {
@@ -84,13 +84,13 @@ const ajaxFunc = (method, data) => {
     return $.ajax({
       url: '/tweets',
       method: 'GET'
-    })
+    });
   } else if (method === 'POST') {
     return $.ajax({
       data: data,
       url: '/tweets',
       method: 'POST'
-    })
+    });
   }
 };
 
@@ -121,5 +121,6 @@ const submitTweet = () => {
     ajaxFunc('POST', serializedStr)
       .then(() => ajaxFunc('GET'))
       .then(data => postTweet(data))
+      .catch(err => console.log(err));
   });
 };
